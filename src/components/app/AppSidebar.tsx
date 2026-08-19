@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { Bookmark, Clock, MessageSquareText, Moon, Plus, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/lib/theme";
@@ -14,6 +14,7 @@ export function AppSidebar({ onNavigate }: { onNavigate?: () => void }) {
   const path = useRouterState({ select: (r) => r.location.pathname });
   const { theme, toggle } = useTheme();
   const { conversations, createConversation } = useStore();
+  const navigate = useNavigate();
 
   return (
     <nav
@@ -36,18 +37,18 @@ export function AppSidebar({ onNavigate }: { onNavigate?: () => void }) {
       </div>
 
       <div className="px-4">
-        <Link
-          to="/"
-          search={{ new: Date.now() }}
+        <button
+          type="button"
           onClick={() => {
             createConversation();
             onNavigate?.();
+            navigate({ to: "/" });
           }}
           className="flex w-full items-center gap-2 rounded-xl border border-sidebar-border px-4 py-3 text-sm font-medium transition-colors hover:bg-sidebar-accent"
         >
           <Plus className="h-4 w-4 shrink-0" aria-hidden />
           New Conversation
-        </Link>
+        </button>
       </div>
 
       <ul className="mt-4 space-y-1 px-4">
