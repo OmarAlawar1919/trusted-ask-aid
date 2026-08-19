@@ -3,6 +3,7 @@ import { Bookmark, Clock, MessageSquareText, Moon, Plus, Sun } from "lucide-reac
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/lib/theme";
 import { useStore } from "@/lib/store";
+import logoAsset from "@/assets/teryaq-logo.jpg.asset.json";
 
 const nav = [
   { to: "/", label: "Chat", icon: MessageSquareText },
@@ -23,13 +24,12 @@ export function AppSidebar({ onNavigate }: { onNavigate?: () => void }) {
     >
       <div className="px-6 pt-7 pb-6">
         <div className="flex items-center gap-3">
-          <span
-            aria-hidden
-            className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-teal/15 font-display text-sm font-bold text-teal"
-          >
-            TB
-          </span>
-          <span className="font-display text-xl font-bold tracking-tight">TERYaq</span>
+          <img
+            src={logoAsset.url}
+            alt="TERYAQ"
+            className="h-9 w-9 shrink-0 rounded-lg object-cover"
+          />
+          <span className="font-display text-xl font-bold tracking-tight">TERYAQ</span>
         </div>
         <p className="mt-3 text-[11px] tracking-[0.14em] text-navy-muted uppercase">
           Clinical Evidence Assistant
