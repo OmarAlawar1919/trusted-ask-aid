@@ -21,7 +21,7 @@ const MOCK_DELAY = Number(import.meta.env["VITE_MOCK_DELAY_MS"] ?? 900);
 
 export interface AskQuestionPayload {
   question: string;
-  conversationId?: string;
+  conversationId?: string | undefined;
 }
 
 export class ApiError extends Error {
