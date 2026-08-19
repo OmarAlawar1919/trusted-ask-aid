@@ -57,7 +57,7 @@ export function EvidenceDetails({
   );
 }
 
-function Field({ label, value, mono }: { label: string; value?: string; mono?: boolean }) {
+function Field({ label, value, mono }: { label: string; value?: string | undefined; mono?: boolean }) {
   return (
     <div className="rounded-xl bg-muted/60 p-3">
       <p className="text-xs text-muted-foreground">{label}</p>
