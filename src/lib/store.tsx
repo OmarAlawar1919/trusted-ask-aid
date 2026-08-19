@@ -34,6 +34,8 @@ export const uid = () => Math.random().toString(36).slice(2, 10);
 
 interface StoreValue {
   hydrated: boolean;
+  activeId: string | null;
+  setActiveId: (id: string | null) => void;
   conversations: Conversation[];
   saved: SavedEvidence[];
   setConversations: (updater: (prev: Conversation[]) => Conversation[]) => void;
@@ -49,6 +51,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
   const [conversations, setConvs] = useState<Conversation[]>([]);
   const [saved, setSaved] = useState<SavedEvidence[]>([]);
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
     const stored = read<Conversation[] | null>(CONV_KEY, null);
@@ -80,6 +83,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       messages: [],
     };
     setConvs((prev) => [conv, ...prev]);
+    setActiveId(conv.id);
     return conv;
   }, []);
 
@@ -100,6 +104,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const value = useMemo(
     () => ({
       hydrated,
+      activeId,
+      setActiveId,
       conversations,
       saved,
       setConversations,
@@ -110,6 +116,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     }),
     [
       hydrated,
+      activeId,
       conversations,
       saved,
       setConversations,
